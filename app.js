@@ -1,18 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const macrocycleRouter = require('./routes/macrocycle_routes');
-
-var db = require('./db');
+import './src/config/database';
+import createError from 'http-errors';
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import cors from 'cors';
+import setRoutes from './src/routes/index';
 
 var app = express();
-var port = 3001;
 
 //CORS
 var corsOptions = {
@@ -29,9 +25,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/macrocycle', macrocycleRouter);
+// routes setup
+setRoutes(app);
 
 
 

@@ -1,4 +1,5 @@
 import macrocycleRoutes from './MacroCycleRoutes';
+import MicroCycleRoutes from './MicroCycleRoutes';
 import userRoutes from './users';
 
 export default (server) => {
@@ -10,4 +11,5 @@ export default (server) => {
   //Modules routes
   userRoutes(server);
   macrocycleRoutes(server);
+  MicroCycleRoutes(server);
 }

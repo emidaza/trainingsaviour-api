@@ -1,5 +1,6 @@
 
 import './src/config/database';
+import "./src/model/index";
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';

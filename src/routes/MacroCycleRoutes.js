@@ -1,4 +1,4 @@
-import MacroCycleController from '../controllers/MacroCyleController';
+import MacroCycleController from '../controllers/MacroCycleController';
 
 export default (server) => {
 
@@ -7,5 +7,6 @@ export default (server) => {
     server.post(`/api/macrocycle`, MacroCycleController.insert)
     server.put(`/api/macrocycle/:id`, MacroCycleController.update);
     server.delete(`/api/macrocycle/:id`, MacroCycleController.delete);
+    server.get(`/api/macrocycle/:id/microcycles`, MacroCycleController.getWithMicroCycles);
 
 }

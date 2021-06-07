@@ -1,6 +1,21 @@
 const { getObjectId } = require('mongo-seeding');
 const moment = require('moment');
 
+function getTrainingDaysIds(initDate, endDate) {
+    let mInitDate = moment(initDate);
+    let mEndDate = moment(endDate);
+    let totalDays = mEndDate.diff(mInitDate, 'd');
+    let trainingDays = []
+    for (let i = 0; i <= totalDays; i++) {
+        let indexDate = moment(initDate).add(i, 'd');
+        let trainingDayId = getObjectId(`trainingDay${indexDate}`);
+        trainingDays.push(
+            trainingDayId
+        )
+    }
+    return trainingDays;
+}
+
 function generateTrainingDays(initDate, endDate) {
     let mInitDate = moment(initDate);
     let mEndDate = moment(endDate);
@@ -8,37 +23,40 @@ function generateTrainingDays(initDate, endDate) {
     let trainingDays = []
     for (let i = 0; i <= totalDays; i++) {
         let indexDate = moment(initDate).add(i, 'd');
+        let trainingDayId = getObjectId(`trainingDay${indexDate}`);
         trainingDays.push(
             {
+                _id: trainingDayId,
                 date: indexDate.toDate(),
-                trainingSessions: generateTrainingSessions()
+                trainingSessions: generateTrainingSessions(indexDate)
             }
         )
     }
-    return trainingDays;    
+    return trainingDays;
 }
 
-function generateTrainingSessions() {
-    const sessionCount = Math.floor(Math.random(0, 4) * (4 - 0));
+function generateTrainingSessions(trainingDate) {
+    const sessionCount = 2; //getRandomInt(2, 4);
     const trainingSessions = [];
     for (let i = 0; i < sessionCount; i++) {
         trainingSessions.push({
             order: i + 1,
             title: getTrainingTurnName(i),
-            workouts: generateWorkouts()
+            workouts: generateWorkoutsIds(i, trainingDate)
         })
     }
     return trainingSessions;
 }
 
-function generateWorkouts() {
-    const workoutsCount = getRandomInt(0, 7);
+function generateWorkouts(trainingSession, trainingDate) {
+    const workoutsCount = 3;//getRandomInt(1, 7);
     const workouts = [];
     for (let i = 0; i < workoutsCount; i++) {
         const repetitions = getRandomInt(1, 5);
         const series = getRandomInt(1, 4);
         const amount = generateReasonableDistance(repetitions, series)
         workouts.push({
+            _id: getObjectId(`workout${i}${trainingSession}${trainingDate}`),
             order: i + 1,
             name: 'Autogenerado',
             repetitions: repetitions,
@@ -47,6 +65,15 @@ function generateWorkouts() {
             intensity: 50,
             functionalArea: getObjectId(getFunctionalArea(amount))
         })
+    }
+    return workouts;
+}
+
+function generateWorkoutsIds(trainingSession, trainingDate) {
+    const workoutsCount = 3;//getRandomInt(1, 7);
+    const workouts = [];
+    for (let i = 0; i < workoutsCount; i++) {
+        workouts.push(getObjectId(`workout${i}${trainingSession}${trainingDate}`));
     }
     return workouts;
 }
@@ -77,20 +104,20 @@ function generateReasonableDistance(repetitions, series) {
 }
 
 function getFunctionalArea(distance) {
-    if(distance < 500) {
+    if (distance < 500) {
         return "potencialactica";
     }
-    if(distance < 1000 && distance >= 500 ) {
+    if (distance < 1000 && distance >= 500) {
         return "restlactica";
     }
-    if(distance === 1000) {
+    if (distance === 1000) {
         return "vo2m";
     }
-    if(distance > 1000 && distance <= 5000) {
+    if (distance > 1000 && distance <= 5000) {
         return "superaerobico";
     }
-    if(distance > 5000) {
-        return "aubaerobico"
+    if (distance > 5000) {
+        return "subaerobico"
     }
 }
 
@@ -101,15 +128,16 @@ function getRandomInt(max, min) {
 function getTrainingTurnName(i) {
     switch (i) {
         case 0:
-            return 'Mañana';
+            return 'Primer Turno';
         case 1:
-            return 'Mediodia';
+            return 'Segundo Turno';
         case 2:
-            return 'Noche';
+            return 'Tercer Turno';
     }
 }
 
 module.exports = {
+    getTrainingDaysIds,
     generateTrainingDays,
     generateTrainingSessions,
     generateWorkouts,

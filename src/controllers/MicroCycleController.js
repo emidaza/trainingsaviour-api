@@ -1,6 +1,6 @@
 import MicroCycle from "../model/MicroCycle";
-import Controller from "./Controller";
 import MicroCycleService from '../service/MicroCycleService';
+import Controller from "./Controller";
 
 const microCycleService = new MicroCycleService(
     MicroCycle

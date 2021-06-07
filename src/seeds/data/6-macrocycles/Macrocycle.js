@@ -1,6 +1,7 @@
 const { getObjectId } = require('mongo-seeding');
 
-const data = [{
+const data = [
+    /* {
     _id: getObjectId("5e8508ea69a10e42d07414be") ,
     initDate: "2020-01-06T19:32:00.000Z",
     endDate: "2020-03-22T19:32:00.000Z",
@@ -18,7 +19,7 @@ const data = [{
         getObjectId("6001ee3a0aed9e0110190df8" ),
         getObjectId("6001ee3a0aed9e0110190df9" )
     ]
-},
+}, */
 {
     _id: getObjectId("5fe3bf23a2541957008a365b") ,
     initDate: "2020-12-23T21:32:00.000Z",

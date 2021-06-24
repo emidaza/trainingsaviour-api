@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 import microCycleObjectives from "../constants/microcycleObjective";
-import TrainingDaySchema from "./TrainingDaySchema";
 
 const schema = new Schema({
     objective: {
@@ -26,7 +25,10 @@ const schema = new Schema({
     programmedAnaerobic: {
         type: Number
     },
-    trainingDays: [TrainingDaySchema]
+    trainingDays: [{
+        type: Schema.Types.ObjectId,
+        ref: 'TrainingDay'
+    }]
 },
     {
         strict: true,

@@ -2,7 +2,7 @@ const { getObjectId } = require("mongo-seeding");
 const { generateTrainingDays } = require('../../utils/trainingSessionUtil');
 
 module.exports = [
-    {
+    /* {
         "_id":  getObjectId("6001ee3a0aed9e0110190df0"),
         "initDate": "2020-01-06T19:32:00.000Z",
         "endDate": "2020-01-12T19:32:00.000Z",
@@ -81,5 +81,5 @@ module.exports = [
         "trainingDays": generateTrainingDays('2020-03-09T19:32:00.000Z',"2020-03-15"),
         "createdAt": "2021-01-15T19:34:18.116Z",
         "updatedAt": "2021-01-15T19:34:18.116Z"
-    }
+    } */
 ]

@@ -5,6 +5,7 @@ import SportProfile from "./SportProfile";
 import WorkoutType from "./WorkoutType";
 import TrainingDay from "./TrainingDay";
 import Workout from "./Workout";
+import User from "./User";
 
 export default {
     MacroCycle,
@@ -13,5 +14,6 @@ export default {
     SportProfile,
     WorkoutType,
     TrainingDay,
-    Workout
+    Workout,
+    User
 }

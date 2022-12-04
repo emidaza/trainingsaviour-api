@@ -4,10 +4,11 @@ import MicroCycleRoutes from './MicroCycleRoutes';
 import TrainingDayRoutes from './TrainingDayRoutes';
 import userRoutes from './users';
 import WorkoutRoutes from './WorkoutRoutes';
+import OauthRoutes from './OauthRoutes'
 
 export default (server) => {
   // Main route
-  server.get('/', function (req, res, next) {
+  server.get('/', function (req, res) {
     res.render('index', { title: 'Express' });
   });
 
@@ -16,6 +17,7 @@ export default (server) => {
   macrocycleRoutes(server);
   MicroCycleRoutes(server);
   FunctionalAreaRoutes(server);
-  WorkoutRoutes(server);  
+  WorkoutRoutes(server);
   TrainingDayRoutes(server);
+  OauthRoutes(server);
 }

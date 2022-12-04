@@ -1,11 +1,11 @@
 //database.js
 
 import mongoose from "mongoose";
+import env from "./environment";
 
 class DbConnection {
   constructor() {
-    const url =
-      process.env.MONGODB_URI || `mongodb://localhost:27017/trainingSaviourDb`;
+    const url = env.MONGODB_URI;
     console.log("Establish new connection with url", url);
     mongoose.Promise = global.Promise;
     mongoose.set("useNewUrlParser", true);
